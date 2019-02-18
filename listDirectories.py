@@ -5,7 +5,7 @@ from shutil import rmtree, copyfile
 settingsFile = open('./settings.txt', 'r')
 directoryToReadFrom = settingsFile.readline().strip()
 directoryPrefix = '_'
-directorySuffix = settingsFile.readline().strip()
+directorySuffix = settingsFile.readline().rstrip()
 likedMusic = settingsFile.readline().strip()
 categories = settingsFile.readline().strip().split(',')
 
@@ -30,24 +30,36 @@ for musicType in musicTypes:
         if not path.exists(flattenedDirectory):
             makedirs(flattenedDirectory)
 
-# create (empty) flattened directories per child of directory
-# for(currPath, directoryNames, fileNames) in walk(directoryToReadFrom):
-#     for category in categories:
-#         makedirs(directoryToReadFrom + '\\' + category + directorySuffix)
-
 # find files to copy
-for directory in directoriesToParse:
-    for(currPath, directoryNames, fileNames) in walk(directory):
-        for musicType in directoryNames:
-            directoriesToParse.append(currPath + musicType)
+for musicType in listdir(directoryToReadFrom):
+    musicTypePath = path.join(directoryToReadFrom, musicType)
+    for musicSeries in listdir(musicTypePath):
+        # for (currPath, directoryNames, fileNames) in walk(musicTypePath):
+        musicSeriesPath = path.join(musicTypePath, musicSeries)
+        for musicSeriesDirectory in listdir(musicSeriesPath):
+            musicSeriesDirectoryPath = path.join(musicSeriesPath, musicSeriesDirectory)
+            if path.isdir(musicSeriesDirectoryPath):
+                print(musicSeriesDirectoryPath)
+            # for fileName in fileNames:
+            #     filePath = path.join(currPath, fileName)
+            #     if likedMusic in currPath and directorySuffix not in currPath:
+            #         print('found liked music: ' + filePath)
+            #         dest = musicTypePath + ''
+            #         copyfile(filePath, dest)
 
-        for fileName in fileNames:
-            filePath = currPath + '\\' + fileName
-            if likedMusic in currPath and directorySuffix not in currPath:
-                copyfile(filePath, directoryToReadFrom + '\\' + likedMusic + directorySuffix + '\\' + fileName)
-                print('liked music: ' + filePath)
-            filesFound.append(filePath)
-    directoriesToParse.remove(directory)
+
+# for directory in directoriesToParse:
+#     for(currPath, directoryNames, fileNames) in walk(directory):
+#         for musicType in directoryNames:
+#             directoriesToParse.append(currPath + musicType)
+#
+#         for fileName in fileNames:
+#             filePath = currPath + '\\' + fileName
+#             if likedMusic in currPath and directorySuffix not in currPath:
+#                 copyfile(filePath, directoryToReadFrom + '\\' + likedMusic + directorySuffix + '\\' + fileName)
+#                 print('liked music: ' + filePath)
+#             filesFound.append(filePath)
+#     directoriesToParse.remove(directory)
 
 print(filesFound)
 
