@@ -23,6 +23,25 @@ generated directory system instead from a quick hacky script.
     - \<music type B\>
     - ...
  
+ ## Example File System
+ - C:/
+    - Anime
+        - Shigatsu wa Kimi no Uso
+            - notAGoodSong.flac
+            - Like
+                - goodSong.flac
+                - Soft
+                    - softSong.flac
+                - Mysterious
+                    - mysteriousSong.flac
+    - Games
+        - NieR Automota
+            - notAGoodSong.flac
+            - Like
+                - goodSong.flac
+                - Epic
+                    - epicSong.flac
+ 
  # Settings
  Settings are specified in [settings.txt](./settings.txt)
  - Line 1: the root directory to read from
