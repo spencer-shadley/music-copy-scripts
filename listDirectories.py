@@ -1,13 +1,24 @@
 from os import walk
+from shutil import rmtree
 
-categoriesFile = open('./categories.txt', 'r')
-directorySuffix = categoriesFile.readline().strip()
-likedMusic = categoriesFile.readline().strip()
-categories = categoriesFile.readline().strip()
+settingsFile = open('./settings.txt', 'r')
+directoryToReadFrom = settingsFile.readline().strip()
+directorySuffix = settingsFile.readline().strip()
+likedMusic = settingsFile.readline().strip()
+categories = settingsFile.readline().strip().split(',')
 
-directoriesToParse = ['H:\\']
+directoriesToParse = [directoryToReadFrom]
 filesFound = []
 
+# delete any existing copied directories
+for(currPath, directoryNames, fileNames) in walk(directoryToReadFrom):
+    for directoryName in directoryNames:
+        if directorySuffix in directoryName:
+            directoryToDelete = currPath + '\\' + directoryName
+            rmtree(directoryToDelete)
+            print('deleted: ' + directoryToDelete)
+
+# find files to copy
 for directory in directoriesToParse:
     for(currPath, directoryNames, fileNames) in walk(directory):
         for directoryName in directoryNames:
@@ -20,3 +31,9 @@ for directory in directoriesToParse:
     directoriesToParse.remove(directory)
 
 print(filesFound)
+
+
+# 1. delete existing suffixed directories
+# 2. create suffixed directories
+# 3. read through all files
+# 4. if a liked file, copy it to the appropriate suffixed directory
