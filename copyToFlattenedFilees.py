@@ -17,19 +17,20 @@ filesFound = []
 for musicType in musicTypes:
     musicTypePath = path.join(directoryToReadFrom, musicType)
 
-    # delete existing flattened directories
-    for musicSeries in listdir(musicTypePath):
-        if directorySuffix in musicSeries:
-            seriesToDelete = path.join(musicTypePath, musicSeries)
-            rmtree(seriesToDelete)
-            print('deleted: ' + seriesToDelete)
+    if path.isdir(musicTypePath):
+        # delete existing flattened directories
+        for musicSeries in listdir(musicTypePath):
+            if directorySuffix in musicSeries:
+                seriesToDelete = path.join(musicTypePath, musicSeries)
+                rmtree(seriesToDelete)
+                print('deleted: ' + seriesToDelete)
 
-    # create empty directories to copy into
-    makedirs(path.join(musicTypePath, directoryPrefix + likedMusic + directorySuffix))
-    for category in categories:
-        flattenedDirectory = musicTypePath + '\\' + directoryPrefix + category + directorySuffix
-        if not path.exists(flattenedDirectory):
-            makedirs(flattenedDirectory)
+        # create empty directories to copy into
+        makedirs(path.join(musicTypePath, directoryPrefix + likedMusic + directorySuffix))
+        for category in categories:
+            flattenedDirectory = path.join(musicTypePath, directoryPrefix + category + directorySuffix)
+            if not path.exists(flattenedDirectory):
+                makedirs(flattenedDirectory)
 
 # find files to copy
 for musicType in listdir(directoryToReadFrom):
