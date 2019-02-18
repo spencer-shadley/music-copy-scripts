@@ -1,4 +1,4 @@
-from os import walk, path, makedirs, listdir
+from os import path, makedirs, listdir
 from shutil import rmtree, copyfile
 
 # retrieve settings

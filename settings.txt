@@ -1,4 +1,4 @@
-H:\music
- - flattened
-Like
-Epic and Inspiring,Love,Mysterious,Soft
+<root directory - ex: C:\>
+<suffix to append to the end of the generated directory - ex: - flattened>
+<indicator that a directory should be copied - ex: Like>
+<comma delimeted genres - ex: Mysterious,Epic,Soft>
