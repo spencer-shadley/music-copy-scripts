@@ -1,12 +1,12 @@
 from os import walk
 
 f = []
+directoriesToParse = ['H:\\']
 
-for(dirpath, dirnames, filenames) in walk('H:\\'):
-    for dir in dirnames:
-        print (dir)
-    for fileName in filenames:
-        f.append((dirpath + fileName))
-    break
-
-print (f)
+for directory in directoriesToParse:
+    for(currPath, directoryNames, fileNames) in walk(directory):
+        for directoryName in directoryNames:
+            directoriesToParse.append(currPath + directoryName)
+        for fileName in fileNames:
+            print(currPath + fileName)
+    directoriesToParse.remove(directory)
