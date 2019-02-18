@@ -1,3 +1,4 @@
+rename this file to "settings.txt", delete this line and fill in the below information
 <root directory - ex: C:\>
 <suffix to append to the end of the generated directory - ex: - flattened>
 <indicator that a directory should be copied - ex: Like>
