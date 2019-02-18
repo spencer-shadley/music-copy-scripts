@@ -43,7 +43,7 @@ generated directory system instead from a quick hacky script.
                     - epicSong.flac
  
  # Settings
- Settings are specified in [settings.txt](./settings.txt)
+ Settings are specified in [settings.txt](./settings.txt), see [settingsTemplate.txt](./settingsTemplate.txt)
  - Line 1: the root directory to read from
  - Line 2: the suffix to apply to flattened directories
  - Line 3: the required string to match for copying a directory
