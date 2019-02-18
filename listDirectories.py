@@ -38,7 +38,13 @@ for musicType in listdir(directoryToReadFrom):
         musicSeriesPath = path.join(musicTypePath, musicSeries)
         for musicSeriesDirectory in listdir(musicSeriesPath):
             musicSeriesDirectoryPath = path.join(musicSeriesPath, musicSeriesDirectory)
-            if path.isdir(musicSeriesDirectoryPath):
+            if path.isdir(musicSeriesDirectoryPath) and likedMusic in musicSeriesDirectoryPath:
+                # pull out all files into the Liked flattened dir
+                for likedFile in listdir(musicSeriesDirectoryPath):
+                    likedFilePath = path.join(musicSeriesDirectoryPath, likedFile)
+                    if not path.isdir(likedFilePath):
+                        print('liked file: ' + likedFilePath)
+                # look for more folders and pull those into their own categories
                 print(musicSeriesDirectoryPath)
             # for fileName in fileNames:
             #     filePath = path.join(currPath, fileName)
