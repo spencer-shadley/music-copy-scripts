@@ -18,10 +18,11 @@ except OSError:
 for root, dirs, files in os.walk(directoryToReadFrom):
     for name in files:
         filePath = os.path.join(root, name)
-        print(root)
-        print(name)
         print(filePath)
         try:
+            if name.lower().endswith(('.png', '.jpg', '.jpeg')):
+                os.rmdir(filePath)
+                print('deleted ' + filePath)
             shutil.move(filePath, flattenedDirectory + '/' + name)
         except:
             print('failed to move file')
